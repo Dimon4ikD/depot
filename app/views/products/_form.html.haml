@@ -6,17 +6,18 @@
         - @product.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
+  .form-group
     = f.label :name
-    = f.text_field :name
-  .field
+    = f.text_field :name,class: "form-control"
+  .form-group
     = f.label :description
-    = f.text_area :description
-  .field
+    = f.text_area :description, class: "form-control"
+  .form-group
     = f.label :price
-    = f.text_field :price
-  .field
+    = f.text_field :price,class: "form-control"
+  .form-group
     = f.label :weight
-    = f.number_field :weight
-  .actions
-    = f.submit 'Save'
+    = f.text_field :weight,class: "form-control"
+
+    = f.submit nil, class: "btn btn-primary"
+

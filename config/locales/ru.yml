@@ -1,0 +1,9 @@
+ru:
+  activerecord:
+    attributes:
+      name: Название
+      price: Цена
+      weight: Вес
+      description: Описание
+    models:
+      product: Товар
