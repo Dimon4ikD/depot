@@ -1,0 +1,11 @@
+rails
+
+Product
+    name: string
+    description: text
+    price: decimal
+    weight: integer
+$rails generate scaffold Product name description:text price:decimal weight:integer
+
+1)
+для русского языка - локаль по умолчанию
