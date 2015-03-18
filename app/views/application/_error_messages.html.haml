@@ -1,0 +1,8 @@
+-if object.errors.any?
+  .panel.panel-danger
+    .panel-heading При сохранени произошли ошибки
+    .panel-body
+      %ul
+        -object.errors.full_messages.each do |msg|
+          %li=msg
+

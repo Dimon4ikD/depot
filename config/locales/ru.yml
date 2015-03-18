@@ -1,9 +1,31 @@
 ru:
   activerecord:
     attributes:
-      name: Название
-      price: Цена
-      weight: Вес
-      description: Описание
+      product:
+        name: Название
+        price: Цена
+        weight: Вес
+        description: Описание
     models:
       product: Товар
+
+
+
+
+
+  views:
+    pagination:
+      first: "&laquo; Первая"
+      last: "Последняя &raquo;"
+      previous: "&lsaquo; Предыдущая"
+      next: "Следующая &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "%{entry_name} не найден"
+          one: "Показание <b>1</b> %{entry_name}"
+          other: "Показание <b>all %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Показание %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> в сумме"

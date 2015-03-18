@@ -1,27 +1,48 @@
-%h1 Listing products
+%h1 Список товаров
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Description
-      %th Price
-      %th Weight
-      %th
-      %th
-      %th
-      
-  %tbody
-    - @products.each do |product|
-      %tr
-        %td= product.name
-        %td= product.description
-        %td= product.price
-        %td= product.weight
-        %td= link_to 'Show', product
-        %td= link_to 'Edit', edit_product_path(product)
-        %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%list-group
+  %b
+    .li.list-group-item-info
+      .row
+        .col-md-2
+          .span.glyphicon.glyphicon-cutlery
+          Название
+        .col-md-4
+          .span.glyphicon.glyphicon-exclamation-sign
+          Описание
+        .col-md-2
+          .span.glyphicon.glyphicon-ruble
+          Цена
+        .col-md-1
+          .span.glyphicon.glyphicon-scale
+          Вес
+        .col-md-1
+        .col-md-1
+        .col-md-1
+  %br
+  - @products.each do |product|
+    %li.list-group-item
+      .row
+        .col-md-2
+          = product.name
+        .col-md-4
+          = product.description
+        .col-md-2
+          = number_to_currency(product.price, locale: :ru)
+        .col-md-1
+          = product.weight
+
+        .col-md-1
+          = link_to 'Посмотреть', product, class: "btn btn-info"
+        .col-md-1
+          = link_to 'Изменить', edit_product_path(product), class: "btn btn-info"
+        .col-md-1
+          = link_to 'Удалить', product, :method => :delete , :data => { :confirm => 'Вы уверены? ' }
+    %br
 
 %br
-
-= link_to 'New Product', new_product_path
+  .row
+    .col-md-10
+      = link_to 'Новый товар', new_product_path, class: "btn btn-info"
+  = paginate @products
