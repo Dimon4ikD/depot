@@ -20,3 +20,12 @@ $rails generate scaffold Product name description:text price:decimal weight:inte
 
 
 gem 'kaminari-bootstrap'
+
+
+
+создание корзины.
+храним на сервере id корзины и товары.
+
+дз на 1 балл
+1) на всех страницах показание количества товаров в корзине
+2) переходить по нажатию на страницу списка элементов корзины

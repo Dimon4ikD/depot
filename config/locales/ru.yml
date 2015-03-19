@@ -6,9 +6,14 @@ ru:
         price: Цена
         weight: Вес
         description: Описание
+      line_item:
+        quantity: Количество
+        product: Товар
+        price: Цена
     models:
       product: Товар
-
+      cart: Корзина
+      lineitem: Элемент Корзины
 
 
 
