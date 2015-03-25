@@ -2,37 +2,60 @@
 .page-header
   <h1>Ваша корзина</h1>
 
+.row.pull-right.col-md-3{style: "white-space: nowrap"}
+  .glyphicon.glyphicon-chevron-right
+  -@sum,@sum2=0,0;@cart.line_items.each{|itm| @sum+=itm.quantity;@sum2+=itm.price*itm.quantity}
+  = link_to "В вашей корзине #{@sum} #{Russian.p(@sum,'товар','товара','товаров')}. Общая цена: #{number_to_currency(@sum2, separator: ",", delimiter: "", unit: "₽", format: "%n %u")}", @cart, class: "btn btn-danger", :style => "white-space:normal; width: 216px;"
+
 .row
-  .col-md-3
-    .list-group
-      .list-group-item.active.glyphicon.glyphicon-pencil
-        Название
-      .list-group-item.glyphicon.glyphicon-info-sign
-        Описание
-      .list-group-item.glyphicon.glyphicon-ruble
-        Цена
-      .list-group-item.glyphicon.glyphicon-certificate
-        Количество
-      .list-group-item.glyphicon.glyphicon-question-sign
-        Общий вес
+.list-group
+  .b
+    .li.list-group-item-info
+      .row
+        .col-md-2
+          .span.glyphicon.glyphicon-cutlery
+          Название
+        .col-md-3
+          .span.glyphicon.glyphicon-exclamation-sign
+          Описание
+        .col-md-2
+          .span.glyphicon.glyphicon-ruble
+          Цена
+        .col-md-2
+          .span.glyphicon.glyphicon-certificate
+          Количество
+        .col-md-1
+          .span.glyphicon.glyphicon-scale
+          Вес
+        .col-md-1
+        .col-md-1
+
+  .br
 
 
 .row
   - @cart.line_items.each do |item|
-    .col-md-3
-      .list-group
-        .list-group-item.active.glyphicon.glyphicon-pencil.li
-          #{item.product.name}
-        .list-group-item.glyphicon.glyphicon-info-sign.li
-          #{item.product.description}
-        .list-group-item.glyphicon.glyphicon-ruble.li
-          #{number_to_currency(item.price*item.quantity, separator: ",", delimiter: "", format: "%n")}
-        .list-group-item.glyphicon.glyphicon-certificate.li
-          #{item.quantity} шт
-        .list-group-item.glyphicon.glyphicon-question-sign.li
-          #{number_to_human(item.product.weight*item.quantity, units: {unit: "г", thousand: "кг"})}
-        .list-group-item.glyphicon.glyphicon-remove.li
-          #{link_to 'Удалить', item, :method => :delete, :data => { :confirm => 'Вы уверены?' }}
+    .li.list-group-item
+      .row
+        .col-md-2
+          .li
+            #{item.product.name}
+        .col-md-3
+          .li
+            #{item.product.description}
+        .col-md-2
+          .li
+            #{number_to_currency(item.price*item.quantity, separator: ",", delimiter: "", format: "%n")}
+        .col-md-2
+          .li
+            #{item.quantity} шт
+        .col-md-1
+          .li
+            #{number_to_human(item.product.weight*item.quantity, units: {unit: "г", thousand: "кг"})}
+        .col-md-2
+          .list-group-item.glyphicon.glyphicon-remove.li
+            #{link_to 'Удалить', item, :method => :delete, :data => { :confirm => 'Вы уверены?' }}
+.br
 
 .row
   .col-md-4
