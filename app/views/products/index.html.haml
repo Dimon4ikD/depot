@@ -1,48 +1,40 @@
-%h1 Список товаров
+.page-header
+  <h1>Продукты</h1>
+.row.pull-right.col-md-3{style: "white-space: nowrap"}
+  .glyphicon.glyphicon-chevron-right
+  -@sum,@sum2=0,0;@cart.line_items.each{|itm| @sum+=itm.quantity;@sum2+=itm.price*itm.quantity}
+  = link_to "В вашей корзине #{@sum} #{Russian.p(@sum,'товар','товара','товаров')}. Общая цена: #{number_to_currency(@sum2, separator: ",", delimiter: "", unit: "₽", format: "%n %u")}", @cart, class: "btn btn-danger", :style => "white-space:normal; width: 216px;"
 
-
-%list-group
-  %b
-    .li.list-group-item-info
-      .row
-        .col-md-2
-          .span.glyphicon.glyphicon-cutlery
-          Название
-        .col-md-4
-          .span.glyphicon.glyphicon-exclamation-sign
-          Описание
-        .col-md-2
-          .span.glyphicon.glyphicon-ruble
-          Цена
-        .col-md-1
-          .span.glyphicon.glyphicon-scale
-          Вес
-        .col-md-1
-        .col-md-1
-        .col-md-1
-  %br
+.row.center
+  .col-md-3
+    .list-group
+      .list-group-item.active.glyphicon.glyphicon-pencil
+        Название
+      .list-group-item.glyphicon.glyphicon-info-sign
+        Описание
+      .list-group-item.glyphicon.glyphicon-ruble
+        Цена
+      .list-group-item.glyphicon.glyphicon-question-sign
+        Вес
+.row
   - @products.each do |product|
-    %li.list-group-item
-      .row
-        .col-md-2
-          = product.name
-        .col-md-4
-          = product.description
-        .col-md-2
-          = number_to_currency(product.price, locale: :ru)
-        .col-md-1
-          = product.weight
+    .col-md-3
+      .list-group
+        .list-group-item.active.glyphicon.glyphicon-pencil.li
+          #{product.name}
+        .list-group-item.glyphicon.glyphicon-info-sign.li
+          #{product.description}
+        .list-group-item.glyphicon.glyphicon-ruble.li
+          #{number_to_currency(product.price, separator: ",", delimiter: "", format: "%n")}
+        .list-group-item.glyphicon.glyphicon-question-sign.li
+          #{number_to_human(product.weight, units: {unit: "г", thousand: "кг"})}
+        .list-group-item.glyphicon.glyphicon-arrow-right.li= link_to 'Показать', product, class: "btn btn-link"
+        .list-group-item.glyphicon.glyphicon-edit.li= link_to 'Редактировать', edit_product_path(product), class: "btn btn-link"
+        .list-group-item.glyphicon.glyphicon-remove.li= link_to 'Удалить', product, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: "btn btn-link"
+        .list-group-item.glyphicon.glyphicon-plus.li= link_to 'в корзину', line_items_path(product_id: product.id), class: "btn btn-link", data:{method: :post}
 
-        .col-md-1
-          = link_to 'Посмотреть', product, class: "btn btn-info"
-        .col-md-1
-          = link_to 'Изменить', edit_product_path(product), class: "btn btn-info"
-        .col-md-1
-          = link_to 'Удалить', product, :method => :delete , :data => { :confirm => 'Вы уверены? ' }
-    %br
+.br
 
-%br
-  .row
-    .col-md-10
-      = link_to 'Новый товар', new_product_path, class: "btn btn-info"
-  = paginate @products
+= link_to 'Новый продукт', new_product_path, class: "btn btn-primary"
+.br
+= paginate @products

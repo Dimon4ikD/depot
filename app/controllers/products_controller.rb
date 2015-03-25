@@ -26,15 +26,17 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
 
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
+    #respond_to do |format|
+    if @product.save
+      redirect_to @product
+      #format.html { redirect_to @product, notice: 'Продукт успешно создан.' }
+      #format.json { render :show, status: :created, location: @product }
+    else
+      render :new
+      #format.html { render :new }
+      #format.json { render json: @product.errors, status: :unprocessable_entity }
     end
+    #end
   end
 
   # PATCH/PUT /products/1
@@ -42,7 +44,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to @product, notice: 'Продукт успешно изменен.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to products_url, notice: 'Продукт успешно уничтожен.' }
       format.json { head :no_content }
     end
   end

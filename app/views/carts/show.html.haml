@@ -1,6 +1,63 @@
 %p#notice= notice
+.page-header
+  <h1>Ваша корзина</h1>
+
+.row
+  .col-md-3
+    .list-group
+      .list-group-item.active.glyphicon.glyphicon-pencil
+        Название
+      .list-group-item.glyphicon.glyphicon-info-sign
+        Описание
+      .list-group-item.glyphicon.glyphicon-ruble
+        Цена
+      .list-group-item.glyphicon.glyphicon-certificate
+        Количество
+      .list-group-item.glyphicon.glyphicon-question-sign
+        Общий вес
 
 
-= link_to 'Edit', edit_cart_path(@cart)
+.row
+  - @cart.line_items.each do |item|
+    .col-md-3
+      .list-group
+        .list-group-item.active.glyphicon.glyphicon-pencil.li
+          #{item.product.name}
+        .list-group-item.glyphicon.glyphicon-info-sign.li
+          #{item.product.description}
+        .list-group-item.glyphicon.glyphicon-ruble.li
+          #{number_to_currency(item.price*item.quantity, separator: ",", delimiter: "", format: "%n")}
+        .list-group-item.glyphicon.glyphicon-certificate.li
+          #{item.quantity} шт
+        .list-group-item.glyphicon.glyphicon-question-sign.li
+          #{number_to_human(item.product.weight*item.quantity, units: {unit: "г", thousand: "кг"})}
+        .list-group-item.glyphicon.glyphicon-remove.li
+          #{link_to 'Удалить', item, :method => :delete, :data => { :confirm => 'Вы уверены?' }}
+
+.row
+  .col-md-4
+    .list-group
+      .list-group-item.active.glyphicon.glyphicon-list.li
+        Итого:
+      .list-group-item.glyphicon.glyphicon-info-sign.li
+        Всего товарных позиций: #{@cart.line_items.length}
+        .br
+        .li
+          Всего товаров:
+          -sum=0;@cart.line_items.each{|itm| sum+=itm.quantity}
+          #{sum}
+        .br
+        .li
+          Суммарный вес:
+          -sum=0;@cart.line_items.each{|item| sum+=item.product.weight*item.quantity}
+          #{number_to_human(sum, units: {unit: "г", thousand: "кг"})}
+      .list-group-item.glyphicon.glyphicon-ruble
+        Цена:
+        -sum=0;@cart.line_items.each{|item| sum+=item.price*item.quantity}
+        #{number_to_currency(sum, separator: ",", delimiter: "", format: "%n")}
+
+= link_to 'Редактировать', edit_cart_path(@cart), class: "btn btn-link"
 \|
-= link_to 'Back', carts_path
+= link_to 'Вернуться к выбору товаров', products_path, class: "btn btn-primary"
+\|
+= link_to 'Оформить заказ', products_path, class: "btn btn-danger disabled"
