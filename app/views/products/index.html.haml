@@ -1,9 +1,5 @@
 .page-header
   <h1>Продукты</h1>
-.row.pull-right.col-md-3{style: "white-space: nowrap"}
-  .glyphicon.glyphicon-chevron-right
-  -@sum,@sum2=0,0;@cart.line_items.each{|itm| @sum+=itm.quantity;@sum2+=itm.price*itm.quantity}
-  = link_to "В вашей корзине #{@sum} #{Russian.p(@sum,'товар','товара','товаров')} Общая цена: #{number_to_currency(@sum2, separator: ",", delimiter: "", unit: "₽", format: "%n %u")}", @cart, class: "btn btn-danger", :style => "white-space:normal; width: 216px;"
 
 -#.row.center
 -#  .col-md-3
