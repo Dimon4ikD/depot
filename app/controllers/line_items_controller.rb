@@ -16,13 +16,13 @@ end
 class LineItemsController < ApplicationController
   include CurrentCart
 
-  before_action :set_cart, only: [:create, :destroy]
+  #before_action :set_cart, only: [:create, :destroy]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
   # GET /line_items
   # GET /line_items.json
   def index
-    @line_items = LineItem.all
+    @line_items = @cart.line_items.all
   end
 
   # GET /line_items/1

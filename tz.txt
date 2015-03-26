@@ -29,3 +29,11 @@ gem 'kaminari-bootstrap'
 дз на 1 балл
 1) на всех страницах показание количества товаров в корзине
 2) переходить по нажатию на страницу списка элементов корзины
+
+
+User
+email:string
+password:digest
+phone_number:string
+adress:text
+role:integr (0- simple, 1-moderator, 2-admin)

@@ -20,7 +20,7 @@
 .list-group
   .b
     .li.list-group-item-info
-      .row
+      .row.well
         .col-md-2
           .span.glyphicon.glyphicon-cutlery
           Название
@@ -41,7 +41,7 @@
 
   - @products.each do |product|
 
-    .li.list-group-item
+    .list-group-item
       .row
         .col-md-2
           .active
@@ -55,7 +55,7 @@
         .col-md-1
           .li
             #{number_to_human(product.weight, units: {unit: "г", thousand: "кг"})}
-        .col-md-3
+        .col-md-3.well-lg
           .list-group-item.glyphicon.glyphicon-arrow-right.li= link_to 'Показать', product, class: "btn btn-link"
           .list-group-item.glyphicon.glyphicon-edit.li= link_to 'Редактировать', edit_product_path(product), class: "btn btn-link"
           .list-group-item.glyphicon.glyphicon-remove.li= link_to 'Удалить', product, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: "btn btn-link"

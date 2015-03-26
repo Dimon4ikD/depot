@@ -20,7 +20,10 @@
   %b Вес:
   = @product.weight
 
-= link_to 'Добавить в корзину', line_items_path(product_id: @product.id), data:{method: :post}, class: "btn btn-success btn-lg active"
+= link_to line_items_path(product_id: @product.id), data:{method: :post}, class: "btn btn-primary" do
+  =fa_icon "cart-plus"
+  Добавить в корзину
+
 \|
 = link_to 'Перейти к корзине', @cart, class: "btn btn-info"
 \|

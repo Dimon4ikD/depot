@@ -10,11 +10,17 @@ ru:
         quantity: Количество
         product: Товар
         price: Цена
+      user:
+        email: Почта
+        password: Пароль
+        phone_number: Телефон
+        address: Адрес
+        role: Роль
     models:
       product: Товар
       cart: Корзина
       lineitem: Элемент Корзины
-
+      user: Пользователь
 
 
 
