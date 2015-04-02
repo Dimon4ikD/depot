@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   end
 
 
-  before_validation: set_default_role
+  before_validation :set_default_role
 
   def set_default_role
     self.role||=0

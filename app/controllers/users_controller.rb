@@ -24,15 +24,18 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    session[:user_id]=@user.id
+    session[:user_id] = @user.id
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path, notice "вы зарегались"
+      redirect_to root_path, notice: 'вы зарегались'
     else
       render :new
     end
 
   end
+
+
+
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
