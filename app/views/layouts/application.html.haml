@@ -15,4 +15,7 @@
 
 
   %body
+    =render 'navbar'
     .container=yield
+      =render 'flash_messsges'
+      =yield
