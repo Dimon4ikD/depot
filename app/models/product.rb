@@ -9,5 +9,4 @@ class Product < ActiveRecord::Base
   def can_destroy?
     line_items.blank?
   end
-
 end

@@ -1,82 +1,48 @@
-%p#notice= notice
 .page-header
-  <h1>Ваша корзина</h1>
-
-
+  <h2>Ваша корзина</h2>
 .row
-.list-group
-  .b
-    .li.list-group-item-info
-      .row.well
-        .col-md-2
-          .span.glyphicon.glyphicon-cutlery
+  .list-group
+    .list-group-item.active
+      .row
+        .col-md-3
           Название
         .col-md-3
-          .span.glyphicon.glyphicon-exclamation-sign
-          Описание
-        .col-md-2
-          .span.glyphicon.glyphicon-ruble
-          Цена
-        .col-md-2
-          .span.glyphicon.glyphicon-certificate
           Количество
-        .col-md-1
-          .span.glyphicon.glyphicon-scale
-          Вес
-        .col-md-1
-        .col-md-1
-
-  .br
-
-
-.row
-  - @cart.line_items.each do |item|
-    .li.list-group-item
-      .row
-        .col-md-2
-          .li
-            #{item.product.name}
         .col-md-3
-          .li
-            #{item.product.description}
-        .col-md-2
-          .li
-            #{number_to_currency(item.price*item.quantity, separator: ",", delimiter: "", format: "%n")}
-        .col-md-2
-          .li
-            #{item.quantity} шт
-        .col-md-1
-          .li
-            #{number_to_human(item.product.weight*item.quantity, units: {unit: "г", thousand: "кг"})}
-        .col-md-2
-          .list-group-item.glyphicon.glyphicon-remove.li
-            #{link_to 'Удалить', item, :method => :delete, :data => { :confirm => 'Вы уверены?' }}
-.br
-
+          Цена
+        .col-md-3
+          Сумма
+  - @cart.line_items.each do |item|
+    .list-group-item
+      .row
+        .col-md-3
+          #{item.product.name}
+        .col-md-3
+          =link_to '',line_item_path(id:item.id,place:"cart"), data:{method: :delete, remote: :true}, class:"btn btn-mini glyphicon glyphicon-minus"
+          #{item.quantity}
+          =link_to '',line_items_path(id:item.id,place:"cart"),data:{method: :post, remote: :true}, class:"btn btn-mini glyphicon glyphicon-plus"
+        .col-md-3
+          #{item.price}
+        .col-md-3
+          #{item.quantity*item.price}
 .row
   .col-md-4
     .list-group
       .list-group-item.active.glyphicon.glyphicon-list.li
-        Итого:
+        Итог:
       .list-group-item.glyphicon.glyphicon-info-sign.li
         Всего товарных позиций: #{@cart.line_items.length}
         .br
         .li
           Всего товаров:
-          -sum=0;@cart.line_items.each{|itm| sum+=itm.quantity}
-          #{sum}
-        .br
-        .li
-          Суммарный вес:
-          -sum=0;@cart.line_items.each{|item| sum+=item.product.weight*item.quantity}
-          #{number_to_human(sum, units: {unit: "г", thousand: "кг"})}
+          #{@cart.line_items.sum("quantity")}
       .list-group-item.glyphicon.glyphicon-ruble
         Цена:
-        -sum=0;@cart.line_items.each{|item| sum+=item.price*item.quantity}
-        #{number_to_currency(sum, separator: ",", delimiter: "", format: "%n")}
+        #{number_to_currency(@cart.all_summ)}
 
-= link_to 'Редактировать', edit_cart_path(@cart), class: "btn btn-link"
+-#= link_to 'Редактировать', edit_cart_path(@cart), class: "btn btn-link"
+= link_to 'Очистить корзину', @cart, data:{method: :delete, confirm: "Вы уверены?"}, class: "btn btn-primary"
 \|
-= link_to 'Вернуться к выбору товаров', products_path, class: "btn btn-primary"
+= link_to 'Вернуться к выбору товаров', products_path, class: "btn btn-info"
 \|
 = link_to 'Оформить заказ', products_path, class: "btn btn-danger disabled"

@@ -8,7 +8,6 @@ class LineItem < ActiveRecord::Base
   validates :quantity, presence: true, numericality: {only_integer: true, greater_than: 0}
   validates :price, presence: true
 
-
   def total_price
     quantity*price
   end

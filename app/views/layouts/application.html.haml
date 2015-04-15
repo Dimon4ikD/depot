@@ -6,13 +6,9 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-    .pull-right.well-lg
-      -@sum,@sum2=0,0;@cart.line_items.each{|itm| @sum+=itm.quantity;@sum2+=itm.price*itm.quantity}
-      = link_to "В вашей корзине #{@sum} #{Russian.p(@sum,'товар','товара','товаров')} Общая цена: #{number_to_currency(@sum2, separator: ",", delimiter: "", unit: "₽", format: "%n %u")}", @cart, class: "btn btn-danger", :style => "white-space:normal; width: 216px;"
-
-      = link_to line_items_path do
-        = fa_icon "shopping-cart"
-
-
   %body
-    .container=yield
+    =render 'navbar'
+    .container
+      =show_cart(@cart) if @cart
+      =render "flash_messages"
+      =yield
