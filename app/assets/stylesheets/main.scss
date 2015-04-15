@@ -6,6 +6,12 @@ $body-bg: #eee;
   @extend .has-error;
 }
 
+<<<<<<< HEAD
 .alert-notice{
   @extend .alert-success
+=======
+
+.alert-notice {
+  @extend .alert-success;
+>>>>>>> origin/master
 }

@@ -37,3 +37,46 @@ password:digest
 phone_number:string
 adress:text
 role:integr (0- simple, 1-moderator, 2-admin)
+
+
+2.04.2015==
+    -lect-
+User.where("roles in (?) or created_at > ?", [1,2], 1.day.ago).all
+User.where.not(id: @current_user.id)
+
+пользовательли с фамилией на букву щ
+User.where("last_name like "Щ%").all
+c=Щ
+User.where("last_name ilike ?, "#{c}").all
+
+User.order("roles desc", "last_name")
+
+dependent: :destroy
+            :nullify
+
+has_many :cities, ->{order(:name), dependent: :destroy}
+
+
+При многие ко многим:
+students*  *group
+
+ создаем таблицу Groups_Students
+    group_id: integer
+    student_id: integer
+
+доп связь многие ко многим через доп модель contract
+has_many :groups, through: :countries
+
+
+cache_counter: true при likes_counter :integer
+
+
+
+==
+
+дз на 1 балл
+1 доделать чтобы работало
+2 написать rake задачу users_create, создающую трех пользователей с разными ролями.
+3 +- в корзину. сделать так чтоюбы при просмотрте товара показывалось количество товаров и можно было
+ по + увеличивать или уменьшать по минусу это в product/show и в lone_items/index
+ то есть "+\-" для изменения кол-ва

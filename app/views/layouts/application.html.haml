@@ -8,7 +8,12 @@
     = csrf_meta_tags
   %body
     =render 'navbar'
+<<<<<<< HEAD
     .container
       =show_cart(@cart) if @cart
       =render "flash_messages"
+=======
+    .container=yield
+      =render 'flash_messsges'
+>>>>>>> origin/master
       =yield
