@@ -24,15 +24,9 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-<<<<<<< HEAD
 
     @user = User.new(user_params)
     session[:user_id]=@user.id
-=======
-    @user = User.new(user_params)
-    session[:user_id] = @user.id
-
->>>>>>> origin/master
     if @user.save
       redirect_to root_path, notice: 'Вы успешно зарегистрированы.'
     else

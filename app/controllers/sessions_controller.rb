@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-<<<<<<< HEAD
   def new
   end
 
@@ -10,21 +9,10 @@ class SessionsController < ApplicationController
       redirect_to root_path, notice: "Авторизация прошла успешно"
     else
       flash[:danger]="Неверный адрес эл. почты или пароль"
-=======
-
-  def create
-    @user=User.where(email: params[:email])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id]=@user.id
-      redirect_to root_path, notice: "Авторизация успешна"
-    else
-      flash[:danger]="Неверное имя пользователя или пароль"
->>>>>>> origin/master
       render :new
     end
   end
 
-<<<<<<< HEAD
 
   def destroy
     session.delete(:user_id)
@@ -34,10 +22,3 @@ class SessionsController < ApplicationController
 
 
 end
-=======
-  def destroy
-    session.delete(:user_id)
-    redirect_to root_path, notice: "Выход выполнен"
-  end
-end
->>>>>>> origin/master
