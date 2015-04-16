@@ -1,0 +1,19 @@
+%h1 Listing favors
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @favors.each do |favor|
+      %tr
+        %td= link_to 'Show', favor
+        %td= link_to 'Edit', edit_favor_path(favor)
+        %td= link_to 'Destroy', favor, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Favor', new_favor_path

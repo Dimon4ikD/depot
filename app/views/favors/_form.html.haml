@@ -1,0 +1,10 @@
+= form_for @favor do |f|
+  - if @favor.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@favor.errors.count, "error")} prohibited this favor from being saved:"
+      %ul
+        - @favor.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

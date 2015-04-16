@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :set_cart_
   before_action :set_current_user
+  before_action :set_favor
 
   protect_from_forgery with: :exception
 
@@ -25,6 +26,13 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordNotFound
     @cart = Cart.create
     session[:cart_id] = @cart.id
+  end
+
+  def set_favor
+    @favor = Favor.find(session[:favor_id])
+  rescue ActiveRecord::RecordNotFound
+    @favor = Favor.create
+    session[:favor_id] = @favor.id
   end
 
   def set_current_user

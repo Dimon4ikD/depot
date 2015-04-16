@@ -25,4 +25,10 @@
         .input-group
           =f.text_field :weight, class: "form-control"
           %span.input-group-addon г.
+    .col-md-4
+      .form-group
+        =f.label :image
+        =f.file_field :image
+
+
   .actions=f.submit nil, class: "btn btn-primary"

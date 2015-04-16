@@ -8,6 +8,8 @@
       %ul.nav.navbar-nav
         %li= link_to "Все товары", products_path
         %li= link_to "Корзина", line_items_path
+        -#%li= link_to "Избранное", favor_path
+
       %ul.nav.navbar-nav.navbar-right
         -if @current_user.blank?
           %li= link_to "Регистрация", new_user_path

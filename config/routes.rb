@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :favors
+
   resources :users
 
   resources :line_items

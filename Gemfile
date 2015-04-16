@@ -46,6 +46,7 @@ gem 'kaminari-bootstrap'
 gem 'font-awesome-rails'
 gem 'font-awesome-sass'
 gem "bcrypt"
+gem "paperclip"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
