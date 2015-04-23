@@ -1,6 +1,6 @@
 class Cart < ActiveRecord::Base
   has_many :line_items, ->{includes(:product).order(:created_at)}, dependent: :destroy
-
+ has_one :order, dependent: :destroy
   def add_item(p)
     line_item = line_items.where(product_id: p.id).first
     unless line_item

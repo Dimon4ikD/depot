@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   ROLES = %w(Пользователь Модератор Администратор)
+  has_many :orders, dependent: :nullify
   has_secure_password
   before_validation :set_default_role
   validates :password, length: {minimum: 6}, if: "password.present?"

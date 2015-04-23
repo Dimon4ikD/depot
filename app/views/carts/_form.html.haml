@@ -5,6 +5,7 @@
       %ul
         - @cart.errors.full_messages.each do |msg|
           %li= msg
+          #link_to - оформить заказ
 
   .actions
     = f.submit 'Сохранить'
