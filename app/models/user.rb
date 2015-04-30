@@ -21,4 +21,4 @@ class User < ActiveRecord::Base
     self.role||=0
   end
 
-                                             end
+end

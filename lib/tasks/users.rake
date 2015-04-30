@@ -1,7 +1,7 @@
 desc "Создание 3 пользователей с разными правами"
 namespace :users do
   task :create=>:environment do
-    us1=User.create(email: "admin@god.ru",
+    us1=User.create(email: "admin@admin.ru",
       password: "i_am_god",
       role: 2)
     us2=User.create(email: "moderator@angel.ru",

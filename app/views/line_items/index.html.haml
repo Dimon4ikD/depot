@@ -18,9 +18,9 @@
         .col-md-3
           #{item.product.name}
         .col-md-3
-          =link_to '',line_item_path(id:item.id,place:"line_items"), data:{method: :delete, remote: :true}, class:"btn btn-mini glyphicon glyphicon-minus"
+          =link_to '',line_item_path(id:item.id,place:"line_items"), data:{method: :delete}, class:"btn btn-mini glyphicon glyphicon-minus"
           #{item.quantity}
-          =link_to '',line_items_path(id:item.id,place:"line_items"),data:{method: :post, remote: :true}, class:"btn btn-mini glyphicon glyphicon-plus"
+          =link_to '',line_items_path(id:item.id,place:"line_items"),data:{method: :post}, class:"btn btn-mini glyphicon glyphicon-plus"
         .col-md-3
           #{item.price}
         .col-md-3
@@ -45,4 +45,4 @@
 \|
 = link_to 'Вернуться к выбору товаров', products_path, class: "btn btn-info"
 \|
-= link_to 'Оформить заказ', products_path, class: "btn btn-danger disabled"
+= link_to 'Оформить заказ', new_order_path, class: "btn btn-danger"
