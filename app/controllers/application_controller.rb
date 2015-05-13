@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :set_cart_
   before_action :set_current_user
-  before_action :set_favor
 
   protect_from_forgery with: :exception
 
@@ -28,13 +27,6 @@ class ApplicationController < ActionController::Base
     session[:cart_id] = @cart.id
   end
 
-  def set_favor
-    @favor = Favor.find(session[:favor_id])
-  rescue ActiveRecord::RecordNotFound
-    @favor = Favor.create
-    session[:favor_id] = @favor.id
-  end
-
   def set_current_user
     if session[:user_id].present?
       @current_user=User.find(session[:user_id])
@@ -42,21 +34,21 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-    if !@curent_user
+    if !@current_user
       flash[:danger]="Требуется авторизация"
       redirect_to login_path
     end
   end
 
   def manager_permission
-    unless @curent_user.try(:manager?)
+    unless @current_user.try(:moderator?)
       flash[:danger]="Недостаточно прав"
       redirect_to login_path
     end
   end
 
   def admin_permission
-    unless @curent_user.try(:admin?)
+    unless @current_user.try(:administrator?)
       flash[:danger]="Недостаточно прав"
       redirect_to login_path
     end
