@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :require_login
-  before_action :manager_permission, except: [:new,:create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :require_login
+  before_action :manager_permission, except: [:new, :create]
 
   # GET /orders
   # GET /orders.json
@@ -12,7 +12,6 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    @statuses=%w(Оформлен Подтвержден Доставляется Завершен Отменен)
   end
 
   # GET /orders/new
@@ -28,16 +27,16 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(new_order_params)
-    @order.cart=@cart
-    @order.user=@current_user
-    @order.status=0
+    @order.cart = @cart
+    @order.user = @current_user
+    @order.status = 0
+    @order.add_lineitems(@cart)
     if @order.save
-      redirect_to root_path, notice: "Заказ оформлен"
       session.delete(:cart_id)
+      redirect_to root_path, notice: 'Заказ оформлен.'
     else
       render :new
     end
-
   end
 
   # PATCH/PUT /orders/1
@@ -45,7 +44,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order, notice: 'Заказ изменён.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -59,7 +58,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_url, notice: 'Заказ удалён.' }
       format.json { head :no_content }
     end
   end

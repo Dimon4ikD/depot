@@ -1,29 +1,29 @@
-%h1 Listing orders
+.page-header
+  %h1 Список заказов
 
-%table
+%table.table.table-bordered.table-hover.table-condensed
   %thead
     %tr
-      %th Cart
-      %th User
-      %th Address
-      %th Status
-      %th Comment
+      %th Корзина
+      %th Пользователь
+      %th Адрес доставки
+      %th Статус
+      %th Комментарий
       %th
       %th
       %th
-      
+
   %tbody
     - @orders.each do |order|
       %tr
-        %td= order.cart
-        %td= order.user
+        %td= order.cart_id
+        %td= order.user_id
         %td= order.address
-        %td= order.status
+        %td= status_view(order.status)
         %td= order.comment
-        %td= link_to 'Show', order
-        %td= link_to 'Edit', edit_order_path(order)
-        %td= link_to 'Destroy', order, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to 'Показать', order
+        %td= link_to 'Редактировать', edit_order_path(order)
+        %td= link_to 'Удалить', order, :method => :delete, :data => { :confirm => 'Вы уверены?' }
 
 %br
-
-= link_to 'New Order', new_order_path
+= paginate @orders

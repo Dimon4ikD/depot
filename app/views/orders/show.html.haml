@@ -1,21 +1,39 @@
 %p#notice= notice
 
 %p
-  %b Cart:
-  = @order.cart
+  %b Корзина:
+  = @order.cart.id
 %p
-  %b User:
-  = @order.user
+  %b Пользователь:
+  = @order.user.email
+  = link_to @order.user, class: "btn btn-link" do
+    =fa_icon "arrow-circle-right"
+    Показать
 %p
-  %b Address:
+  %b Адрес доставки:
   = @order.address
 %p
-  %b Status:
-  = @order.status
+  %b Статус:
+  = status_view(@order.status)
 %p
-  %b Comment:
+  %b Комментарий:
   = @order.comment
-
-= link_to 'Edit', edit_order_path(@order)
-\|
-= link_to 'Back', orders_path
+%p
+  %b Список товаров:
+  .row
+    - @order.cart.line_items.each do |item|
+      .col-md-2
+        .list-group.ul
+          .list-group-item.active.li
+            .span.badge=item.quantity
+            =item.product.name
+          .list-group-item.li
+            =item.product.description
+          .list-group-item.li
+            .span.badge= fa_icon "ruble"
+            =number_to_currency(item.price*item.quantity,
+              separator: ",", delimiter: "", format: "%n")
+          .list-group-item.li
+            .span.badge=number_to_human(item.product.weight*item.quantity, units: {unit: "г", thousand: "кг"})
+            Вес
+= link_to 'Назад', orders_path

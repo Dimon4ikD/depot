@@ -1,11 +1,26 @@
 module OrdersHelper
-  def select_user(name, selected = nil)
-    select_tag(name, options_for_select(User.order('email').load.map{ |x| [x.email, x.id] } + [['', nil]],[selected]))
+  def select_user(user, selected = nil)
+    select_tag(user, options_for_select(
+                       User.order('email').load.map{ |x| [x.email, x.id] } + [['', nil]],
+                       [selected]))
   end
 
-  def select_status(name, selected = nil)
-    select_tag(name, options_for_select([['Оформлен',1],['Подтвержден',2],['Доставляется',3],['Завершен',4],['Отменен',5]],[selected]))
+  def select_status(status, selected = nil)
+    select_tag(status, options_for_select([['Оформлен', 0], ['Подтверждён', 1],
+                                           ['Отменён', 2], ['Доставляется', 3],
+                                           ['Завершён', 4]]))
   end
-
-
+  def status_view(status)
+    if status==0
+      "Оформлен"
+    elsif status==1
+      "Подтверждён"
+    elsif status==2
+      "Отменён"
+    elsif status==3
+      "Доставляется"
+    else
+      "Завершён"
+    end
+  end
 end

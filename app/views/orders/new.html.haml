@@ -1,12 +1,14 @@
-%h1 Оформление заказа
-
+.page-header
+  %h1 Новый заказ
 
 =form_for @order do |f|
   =error_messages_for @order
-  .form-group
-    =f.label :address
-    =f.text_area :address, class: 'form-group', rows: 3
-    .actions=f.submit nil, class: 'btn-btn-primary'
-= render 'form'
 
-= link_to 'Back', orders_path
+  .form-group.col-md-4
+    =f.label :address
+    =f.text_area :address, class: 'form-control', rows: 1
+    .row
+    %br
+    .actions=f.submit nil, class: 'btn btn-primary'
+
+    = link_to 'Back', orders_path
